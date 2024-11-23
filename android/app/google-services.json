@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "199123522132",
+    "project_id": "projetoscarrostop",
+    "storage_bucket": "projetoscarrostop.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:199123522132:android:9d4e64ae2765dc1e1353c1",
+        "android_client_info": {
+          "package_name": "br.unigran"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD34zSoVbarVhX4IBAngcibAGViFoIMaLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
