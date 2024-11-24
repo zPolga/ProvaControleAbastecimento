@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'abastecimento/HistoricoAbastecimento.dart';
+import 'abastecimento/adcionarAbastecimento.dart';
+import 'abastecimento/calculoAbastecimento.dart';
 import 'funcoes/adcionarVeiculo.dart';
 import 'funcoes/listaVeiculos.dart';
 import 'login.dart';
@@ -76,6 +79,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => AdicionarVeiculo()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.add, color: Colors.indigo),
+              title: Text("Adcionar Abastecimento"),
+            ),
+            ListTile(
+              leading: Icon(Icons.history),
+              title: Text("Histórico de Abastecimentos"),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HistoricoAbastecimentos(veiculoId: "ID_DO_VEICULO")),
                 );
               },
             ),
