@@ -32,8 +32,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _login() async {
-    final email = _emailController.text;
-    final password = _passwordController.text;
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
 
     // Chama o método de login e recebe a mensagem de resultado
     String message = await auth.signInWithEmailPassword(email, password);
@@ -46,8 +46,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _register() async {
-    final email = _emailController.text;
-    final password = _passwordController.text;
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
 
     // Chama o método de registro e recebe a mensagem de resultado
     String message = await auth.registerWithEmailPassword(email, password);
@@ -57,6 +57,36 @@ class _LoginScreenState extends State<LoginScreen> {
       SnackBar(content: Text(message)),
     );
     _validaLogin();
+  }
+
+  void _resetPassword() async {
+    final email = _emailController.text.trim();
+    if (email.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Por favor, insira seu e-mail para recuperar a senha."),
+          backgroundColor: Colors.orange,
+        ),
+      );
+      return;
+    }
+
+    try {
+      await auth.enviarEmailRecuperacaoSenha(email);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("E-mail de recuperação enviado para $email."),
+          backgroundColor: Colors.green,
+        ),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Erro ao enviar e-mail: $e"),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 
   void _validaLogin() async {
@@ -96,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               obscureText: true,
             ),
-            SizedBox(height: 24),
+            SizedBox(height: 16),
             ElevatedButton(
               onPressed: _login,
               child: Text('Entrar'),
@@ -105,6 +135,11 @@ class _LoginScreenState extends State<LoginScreen> {
             ElevatedButton(
               onPressed: _register,
               child: Text('Registrar'),
+            ),
+            SizedBox(height: 8),
+            TextButton(
+              onPressed: _resetPassword,
+              child: Text('Esqueceu sua senha?'),
             ),
           ],
         ),
